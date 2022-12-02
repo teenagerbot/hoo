@@ -1,0 +1,35 @@
+<img src="android.png" alt="@android" />
+<style>
+  img {
+    width: 94%;
+    position: relative;
+    top: 24%;
+    transition: 2s linear;
+    opacity: 1;
+  }
+  img:hover {
+    cursor: pointer;
+  }
+  .remove {
+    opacity: 0;
+  }
+</style>
+<script>
+  document.querySelector('img').onload = function() {
+    setTimeout(() => {
+      this.classList.add('remove');
+      this.ontransitionend = function () {
+        this.remove();
+        let img = document.createElement('img');
+        img.src = "run.png";
+        img.id = "rrun";
+        document.body.appendChild(img);
+        document.querySelector("#rrun").onclick = () => {
+          let url = new URL(window.parent.location.href);
+          var site = url.searchParams.get("url");
+          window.parent.document.querySelector("iframe").src = site;
+        }
+      };
+    }, 1500);
+  };
+</script>
